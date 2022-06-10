@@ -1,0 +1,114 @@
+#include<stdio.h>
+
+int f=-1,r=-1,n,l[20];
+
+void enqueue()
+{
+
+    if((r+1)%n==f)
+    {
+        printf("Queue is full\n");
+        return;
+    }
+    if(f==-1){ f=0;}
+    r=(r+1)%n;
+    printf("Enter a value: ");
+    
+    scanf("%d",&l[r]);
+    
+
+}
+
+void dequeue()
+{
+    if(r==f)
+    {
+        printf("Queue is empty\n");
+        f=-1;
+        r=-1;
+        return;
+    }
+
+    
+    f=(f+1)%n;
+
+
+
+}
+void display()
+{
+    if(f==-1 && r==-1)
+    {
+        return;
+    }
+    
+    if(f<=r)
+    {
+        printf("%d",l[f]);
+        for (int  i=f+1; i <=r; i++)
+       {
+        printf("->%d",l[i]);
+       }
+       printf("\n");
+    }
+    else if(f>r)
+    {
+        //f=2 r=1
+        printf("%d",l[f]);
+        for(int i=f+1;i<n;i++)//i=2 i=3 n=4
+        {
+            printf("->%d",l[i]);
+        }
+        for(int i=0;i<=r;i++)//i=0 i=1 r=1
+        {
+           printf("->%d",l[i]);
+        }
+         printf("\n");
+    }
+
+
+}
+
+int  main()
+{
+    printf("Enter size: ");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        enqueue();
+    }
+
+    int flag=1;
+   do
+   {
+       printf("\n");
+       printf("1.Enqueue\n");
+       printf("2.Dequeue\n");
+       printf("3.Exit\n");
+       int c;scanf("%d",&c);
+
+       switch(c)
+       {
+       case 1:
+        {
+            enqueue();
+            display();
+            break;
+        }
+       case 2:
+        {
+            dequeue();
+            display();
+            break;
+        }
+       case 3:
+        {
+            flag=0;
+            break;
+        }
+       }
+
+
+   }while(flag==1);
+
+}
